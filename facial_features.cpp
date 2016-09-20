@@ -36,25 +36,31 @@ string face_cascade_path, eye_cascade_path, nose_cascade_path, mouth_cascade_pat
 
 int main(int argc, char** argv)
 {
-    if(argc < 3)
-    {
-        help();
-        return 1;
-    }
+    //if(argc < 3)
+    //{
+        //help();
+        //return 1;
+		//}
 
     // Extract command-line options
     vector<string> args;
     setCommandOptions(args, argc, argv);
 
     input_image_path = argv[1];
-    face_cascade_path = argv[2];
-    eye_cascade_path = (doesCmdOptionExist(args, "-eyes")) ? getCommandOption(args, "-eyes") : "";
-    nose_cascade_path = (doesCmdOptionExist(args, "-nose")) ? getCommandOption(args, "-nose") : "";
-    mouth_cascade_path = (doesCmdOptionExist(args, "-mouth")) ? getCommandOption(args, "-mouth") : "";
+
+    //face_cascade_path = argv[2];
+	face_cascade_path = "haarcascade_frontalface_default.xml";
+    //eye_cascade_path = (doesCmdOptionExist(args, "-eyes")) ? getCommandOption(args, "-eyes") : "";
+    //nose_cascade_path = (doesCmdOptionExist(args, "-nose")) ? getCommandOption(args, "-nose") : "";
+    //mouth_cascade_path = (doesCmdOptionExist(args, "-mouth")) ? getCommandOption(args, "-mouth") : "";
+
+    eye_cascade_path = "haarcascade_eye.xml";
+    nose_cascade_path = "haarcascade_mcs_nose.xml";
+    mouth_cascade_path =  "haarcascade_mcs_mouth.xml";
 
     // Load image and cascade classifier files
     Mat image;
-    image = imread("lena.jpg");
+    image = imread(input_image_path);
 
     // Detect faces and facial features
     vector<Rect_<int> > faces;
@@ -100,6 +106,7 @@ static void help()
 
     cout << "\nUSAGE: ./cpp-example-facial_features [IMAGE] [OPTIONS]\n"
         "IMAGE\n\tPath to the image of a face taken as input.\n"
+
         "OPTIONS: \nThere are 3 options available which are described in detail. There must be a "
         "space between the option and it's argument (All three options accept arguments).\n"
         "\t-eyes : Specify the haarcascade classifier for eye detection.\n"
@@ -108,6 +115,7 @@ static void help()
 
 
     cout << "EXAMPLE:\n"
+
         "\tThis will detect the face, eyes and mouth in image.jpg.\n"
         "(2) ./cpp-example-facial_features image.jpg face.xml -nose nose.xml\n"
         "\tThis will detect the face and nose in image.jpg.\n"
@@ -138,7 +146,9 @@ static void detectFacialFeaures(Mat& img, const vector<Rect_<int> > faces, strin
         // Mark the bounding box enclosing the face
         Rect face = faces[i];
         rectangle(img, Point(face.x, face.y), Point(face.x+face.width, face.y+face.height),
+
                 Scalar(255, 0, 255), 2, 8);
+
 
         // Eyes, nose and mouth will be detected inside the face (region of interest)
         Mat ROI = img(Rect(face.x, face.y, face.width, face.height));
@@ -175,7 +185,9 @@ static void detectFacialFeaures(Mat& img, const vector<Rect_<int> > faces, strin
             for(unsigned int j = 0; j < nose.size(); ++j)
             {
                 Rect n = nose[j];
+
                 circle(ROI, Point(n.x+n.width/2, n.y+n.height/2), 5, Scalar(0, 255, 0), -1, 8);
+
                 nose_center_height = (n.y + n.height/2);
             }
         }
