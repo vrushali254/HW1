@@ -36,11 +36,11 @@ string face_cascade_path, eye_cascade_path, nose_cascade_path, mouth_cascade_pat
 
 int main(int argc, char** argv)
 {
-    if(argc < 3)
-    {
-        help();
-        return 1;
-    }
+    //if(argc < 3)
+    //{
+        //help();
+        //return 1;
+		//}
 
     // Extract command-line options
     vector<string> args;
@@ -49,9 +49,13 @@ int main(int argc, char** argv)
     input_image_path = argv[1];
     //face_cascade_path = argv[2];
 	face_cascade_path = "haarcascade_frontalface_default.xml";
-    eye_cascade_path = (doesCmdOptionExist(args, "-eyes")) ? getCommandOption(args, "-eyes") : "";
-    nose_cascade_path = (doesCmdOptionExist(args, "-nose")) ? getCommandOption(args, "-nose") : "";
-    mouth_cascade_path = (doesCmdOptionExist(args, "-mouth")) ? getCommandOption(args, "-mouth") : "";
+    //eye_cascade_path = (doesCmdOptionExist(args, "-eyes")) ? getCommandOption(args, "-eyes") : "";
+    //nose_cascade_path = (doesCmdOptionExist(args, "-nose")) ? getCommandOption(args, "-nose") : "";
+    //mouth_cascade_path = (doesCmdOptionExist(args, "-mouth")) ? getCommandOption(args, "-mouth") : "";
+
+    eye_cascade_path = "haarcascade_eye.xml";
+    nose_cascade_path = "haarcascade_mcs_nose.xml";
+    mouth_cascade_path =  "haarcascade_mcs_mouth.xml";
 
     // Load image and cascade classifier files
     Mat image;
