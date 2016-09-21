@@ -1,10 +1,3 @@
-/*
- * Author: Samyak Datta (datta[dot]samyak[at]gmail.com)
- *
- * A program to detect facial feature points using
- * Haarcascade classifiers for face, eyes, nose and mouth
- *
- */
 
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
